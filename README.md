@@ -1,22 +1,15 @@
-# Awesome Humanoid WBC
+# Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review
 
 [![Survey](https://img.shields.io/badge/Type-Survey%20Companion-1f6feb?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 [![Topic](https://img.shields.io/badge/Topic-Humanoid%20WBC-0f766e?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 [![Focus](https://img.shields.io/badge/Focus-Implementation--Centric-b45309?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 [![Status](https://img.shields.io/badge/Status-Active%20Curation-7c3aed?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 
-Companion repository for the survey paper **Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review**.
+Project page and curated reference repository for the survey paper on learning-based whole-body control for humanoid robots.
 
 **Authors:** Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Feifei Wu, Zhe Li, and Xiu Li
 
-This repository curates the literature of learning-based whole-body control for humanoid robots through the same lens as our paper: not as an undifferentiated timeline, but as a structured engineering pipeline. The collection is organized around the practical path from **data acquisition and preprocessing**, through **policy learning and architecture design**, to **simulation transfer and real-robot deployment**.
-
-To make the survey easier to navigate, the main papers are grouped by the four control paradigms discussed in the manuscript:
-
-- **Command-based control** for velocity-, gait-, and terrain-conditioned whole-body behaviors
-- **Motion tracking-based control** for MoCap, video, and teleoperation driven imitation
-- **Interaction-based control** for contact-rich loco-manipulation and scene interaction
-- **Multimodal learning-based control** for vision-, language-, and semantics-conditioned action generation
+This repository organizes the literature of humanoid whole-body control from an implementation-oriented perspective, following the pipeline from **data acquisition**, **policy learning**, and **simulation transfer** to **real-robot deployment**. The main papers are grouped into four paradigms: **command-based control**, **motion tracking-based control**, **interaction-based control**, and **multimodal learning-based control**.
 
 > The goal of this repository is readability and implementation value: representative papers, key datasets, simulators, and official code resources are placed in one survey-aligned index.
 >
