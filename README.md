@@ -1,14 +1,24 @@
 # Awesome Humanoid WBC
 
+[![Survey](https://img.shields.io/badge/Type-Survey%20Companion-1f6feb?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
+[![Topic](https://img.shields.io/badge/Topic-Humanoid%20WBC-0f766e?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
+[![Focus](https://img.shields.io/badge/Focus-Implementation--Centric-b45309?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
+[![Status](https://img.shields.io/badge/Status-Active%20Curation-7c3aed?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
+
 Companion repository for the survey paper **Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review**.
 
 **Authors:** Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Feifei Wu, Zhe Li, and Xiu Li
 
-This repository follows the logic of our survey rather than a purely chronological paper dump. We organize the literature around the full implementation pipeline of learning-based humanoid whole-body control: **data acquisition and preprocessing -> policy learning and architecture design -> simulation transfer and real-robot deployment**. Within the policy-learning stage, we further adopt the four task paradigms used in the paper: **command-based control**, **motion tracking-based control**, **interaction-based control**, and **multimodal learning-based control**.
+This repository curates the literature of learning-based whole-body control for humanoid robots through the same lens as our paper: not as an undifferentiated timeline, but as a structured engineering pipeline. The collection is organized around the practical path from **data acquisition and preprocessing**, through **policy learning and architecture design**, to **simulation transfer and real-robot deployment**.
 
-The presentation style is inspired by [ChunmingHe/awesome-diffusion-models-in-low-level-vision](https://github.com/ChunmingHe/awesome-diffusion-models-in-low-level-vision): concise recommendations at the top, followed by curated tables for the main paper list.
+To make the survey easier to navigate, the main papers are grouped by the four control paradigms discussed in the manuscript:
 
-> This list emphasizes implementation-relevant papers, datasets, simulators, and codebases that are directly useful for building humanoid WBC systems.
+- **Command-based control** for velocity-, gait-, and terrain-conditioned whole-body behaviors
+- **Motion tracking-based control** for MoCap, video, and teleoperation driven imitation
+- **Interaction-based control** for contact-rich loco-manipulation and scene interaction
+- **Multimodal learning-based control** for vision-, language-, and semantics-conditioned action generation
+
+> The goal of this repository is readability and implementation value: representative papers, key datasets, simulators, and official code resources are placed in one survey-aligned index.
 >
 > Code links are included when an official repository or project page is clearly available.
 
