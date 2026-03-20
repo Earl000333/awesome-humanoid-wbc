@@ -7,8 +7,6 @@
 
 Project page and curated reference repository for the survey paper on learning-based whole-body control for humanoid robots.
 
-**Authors:** Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Feifei Wu, Zhe Li, and Xiu Li
-
 This repository organizes the literature of humanoid whole-body control from an implementation-oriented perspective, following the pipeline from **data acquisition**, **policy learning**, and **simulation transfer** to **real-robot deployment**. The main papers are grouped into four paradigms: **command-based control**, **motion tracking-based control**, **interaction-based control**, and **multimodal learning-based control**.
 
 > The goal of this repository is readability and implementation value: representative papers, key datasets, simulators, and official code resources are placed in one survey-aligned index.
