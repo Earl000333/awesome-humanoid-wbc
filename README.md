@@ -1,250 +1,230 @@
 # Awesome Humanoid WBC
 
-Companion repository for the review paper **Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review**.
+Companion repository for the survey paper **Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review**.
 
-This repository curates papers, datasets, simulators, and open-source systems for learning-based whole-body control of humanoid robots. The list is organized for review writing and implementation reuse rather than for broad hype coverage: we emphasize locomotion, whole-body tracking, teleoperation, loco-manipulation, language-conditioned control, retargeting, and the infrastructure that makes those systems reproducible.
+**Authors:** Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Feifei Wu, Zhe Li, and Xiu Li
 
-> Code links are included only when an official repository or project page is easy to verify.
+This repository follows the logic of our survey rather than a purely chronological paper dump. We organize the literature around the full implementation pipeline of learning-based humanoid whole-body control: **data acquisition and preprocessing -> policy learning and architecture design -> simulation transfer and real-robot deployment**. Within the policy-learning stage, we further adopt the four task paradigms used in the paper: **command-based control**, **motion tracking-based control**, **interaction-based control**, and **multimodal learning-based control**.
+
+The presentation style is inspired by [ChunmingHe/awesome-diffusion-models-in-low-level-vision](https://github.com/ChunmingHe/awesome-diffusion-models-in-low-level-vision): concise recommendations at the top, followed by curated tables for the main paper list.
+
+> This list emphasizes implementation-relevant papers, datasets, simulators, and codebases that are directly useful for building humanoid WBC systems.
 >
-> Year grouping follows the citation year in the seed bibliography.
+> Code links are included when an official repository or project page is clearly available.
 
 Last updated: 2026-03-20
 
 ## Table of Contents
 
-- [Recommended Starting Points](#recommended-starting-points)
-- [2026](#2026)
-- [2025](#2025)
-- [2024](#2024)
-- [2023](#2023)
-- [2022 and Earlier](#2022-and-earlier)
-- [Open-Source Frameworks](#open-source-frameworks)
+- [Latest Works Recommended](#latest-works-recommended)
+- [Survey View](#survey-view)
+- [Task Taxonomy](#task-taxonomy)
+- [Implementation Pipeline](#implementation-pipeline)
+- [Command-based Control](#command-based-control)
+- [Motion Tracking-based Control](#motion-tracking-based-control)
+- [Interaction-based Control](#interaction-based-control)
+- [Multimodal Learning-based Control](#multimodal-learning-based-control)
+- [Motion Data, Retargeting, and Perception Assets](#motion-data-retargeting-and-perception-assets)
+- [Simulators and Open-Source Frameworks](#simulators-and-open-source-frameworks)
+- [Surveys and Background](#surveys-and-background)
 - [Citation](#citation)
 
-## Recommended Starting Points
+## Latest Works Recommended
 
-- Real-World Humanoid Locomotion with Reinforcement Learning. Radosavovic et al. Science Robotics, 2024. [Paper](https://arxiv.org/abs/2303.03381) [Project](https://learning-humanoid-locomotion.github.io/)
-- Learning Humanoid Locomotion with Perceptive Internal Model. Long et al. ICRA, 2025. [Paper](https://junfeng-long.github.io/PIM/)
-- HOVER: Versatile Neural Whole-Body Controller for Humanoid Robots. He et al. ICRA, 2025. [Paper](https://arxiv.org/abs/2410.21229) [Project](https://hover-versatile-humanoid.github.io/)
-- ExBody2: Advanced Expressive Humanoid Whole-Body Control. Ji et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2412.13196)
-- OmniH2O: Universal and Dexterous Human-to-Humanoid Whole-Body Teleoperation and Learning. He et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2406.08858) [Project](https://omni.human2humanoid.com/)
-- BeyondMimic: From Motion Tracking to Versatile Humanoid Control via Guided Diffusion. Liao et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2508.08241)
-- LangWBC: Language-directed Humanoid Whole-Body Control via End-to-end Learning. Shao et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2504.21738)
-- HumanoidVerse: A Multi-Simulator Framework for Humanoid Robot Sim-to-Real Learning. CMU LeCAR Lab. GitHub repository, 2025. [Project](https://github.com/LeCAR-Lab/HumanoidVerse) [Code](https://github.com/LeCAR-Lab/HumanoidVerse)
+| Title | Why it matters | Venue | Links |
+| --- | --- | --- | --- |
+| Real-World Humanoid Locomotion with Reinforcement Learning | Landmark real-robot RL locomotion baseline for modern humanoid control | Science Robotics 2024 | [Paper](https://arxiv.org/abs/2303.03381) / [Project](https://learning-humanoid-locomotion.github.io/) |
+| Learning Humanoid Locomotion with Perceptive Internal Model | Strong terrain-aware command-based locomotion pipeline | ICRA 2025 | [Paper](https://junfeng-long.github.io/PIM/) |
+| ExBody2: Advanced Expressive Humanoid Whole-Body Control | Representative large-scale motion tracking and expressive imitation system | arXiv 2024 | [Paper](https://arxiv.org/abs/2412.13196) |
+| HOVER: Versatile Neural Whole-Body Controller for Humanoid Robots | Unified whole-body control across multiple behavior modes | ICRA 2025 | [Paper](https://arxiv.org/abs/2410.21229) / [Project](https://hover-versatile-humanoid.github.io/) |
+| OmniH2O: Universal and Dexterous Human-to-Humanoid Whole-Body Teleoperation and Learning | Strong teleoperation and human-to-humanoid data pipeline | arXiv 2024 | [Paper](https://arxiv.org/abs/2406.08858) / [Project](https://omni.human2humanoid.com/) |
+| BeyondMimic: From Motion Tracking to Versatile Humanoid Control via Guided Diffusion | Representative diffusion-based whole-body control work | arXiv 2025 | [Paper](https://arxiv.org/abs/2508.08241) |
+| LangWBC: Language-directed Humanoid Whole-Body Control via End-to-end Learning | Clear entry point for language-conditioned humanoid control | arXiv 2025 | [Paper](https://arxiv.org/abs/2504.21738) |
+| HumanoidVerse: A Multi-Simulator Framework for Humanoid Robot Sim-to-Real Learning | Practical open-source stack for experimentation and sim-to-real studies | GitHub 2025 | [Repo](https://github.com/LeCAR-Lab/HumanoidVerse) |
 
-## 2026
+## Survey View
 
-### Language-Conditioned and Foundation Models
+This repository is designed to mirror the structure of the survey:
 
-- FRoM-W1: Towards General Humanoid Whole-Body Control with Language Instructions. Li et al. arXiv, 2026. [Paper](https://arxiv.org/abs/2601.12799)
-- HumanX: Toward Agile and Generalizable Humanoid Interaction Skills from Human Videos. Wang et al. arXiv, 2026. [Paper](https://arxiv.org/abs/2602.02473)
+1. **Task understanding**: what control objective is being solved.
+2. **Data pipeline**: where motion, perception, and interaction priors come from.
+3. **Learning paradigm**: RL, imitation, teacher-student distillation, latent modeling, diffusion, or foundation models.
+4. **Deployment stack**: simulator choice, sim-to-real method, and real-robot engineering constraints.
 
-### Locomotion and Whole-Body Control
+If you are reading the survey while building a system, the tables below are intended to let you jump quickly from a paragraph in the paper to representative references and codebases.
 
-- CLF-RL: Control Lyapunov Function Guided Reinforcement Learning. Li et al. RA-L, 2026. [Paper](https://www.zacholkin.com/research/clf_rl/)
-- OmniXtreme: Breaking the Generality Barrier in High-Dynamic Humanoid Control. Wang et al. arXiv, 2026. [Paper](https://arxiv.org/abs/2602.23843)
+## Task Taxonomy
 
-## 2025
+| Paradigm | Typical input | Typical output | Core challenge | Representative examples |
+| --- | --- | --- | --- | --- |
+| Command-based control | Velocity, heading, gait command, terrain cues | Whole-body locomotion actions | Stability, robustness, terrain adaptation, curriculum design | Real-World RL, PIM, BeamDojo, HugWBC |
+| Motion tracking-based control | MoCap, video, teleoperation, reference trajectory | High-fidelity whole-body tracking | Physical plausibility, tracking fidelity, deployable sensing | ExBody2, GMT, UniTracker, HOVER |
+| Interaction-based control | Object/task goals, contact objectives, sparse rewards | Contact-rich loco-manipulation policy | Sparse-reward exploration, long-horizon planning, contact robustness | AMO, Falcon, StageACT, Opt2Skill |
+| Multimodal learning-based control | Vision, language, proprioception, semantics | Perception-to-action or semantic-to-action policy | Cross-modal alignment, feasibility, real-time inference | LangWBC, LeVERB, Sentinel, FRoM-W1 |
 
-### Locomotion
+## Implementation Pipeline
 
-- BeamDojo: Learning Agile Humanoid Locomotion on Sparse Footholds. Wang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.10363)
-- Learning Humanoid Locomotion with Perceptive Internal Model. Long et al. ICRA, 2025. [Paper](https://junfeng-long.github.io/PIM/)
-- Chasing Stability: Humanoid Running via Control Lyapunov Function Guided Reinforcement Learning. Olkin et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.19573)
-- A Unified and General Humanoid Whole-Body Controller for Versatile Locomotion. Xue et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.03206)
-- Gait-Conditioned Reinforcement Learning with Multi-Phase Curriculum for Humanoid Locomotion. Peng et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.20619)
-- Contrastive Representation Learning for Robust Sim-to-Real Transfer of Adaptive Humanoid Locomotion. Lu et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.12858)
-- Humanoid Whole-Body Locomotion on Narrow Terrain via Dynamic Balance and Reinforcement Learning. Xie et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.17219)
-- ULC: A Unified and Fine-Grained Controller for Humanoid Loco-Manipulation. Sun et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2507.06905)
-- HiFAR: Multi-stage Curriculum Learning for High-Dynamics Humanoid Fall Recovery. Chen et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.20061)
-- Reduced-Order Model Guided Contact-Implicit Model Predictive Control for Humanoid Locomotion. Esteban et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.15630)
-- RL-augmented Adaptive Model Predictive Control for Bipedal Locomotion over Challenging Terrain. Kamohara et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.18466)
-- HuMam: Humanoid Motion Control via End-to-End Deep Reinforcement Learning with Mamba. Wang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.18046)
-- Traversing Narrow Paths: A Two-Stage Reinforcement Learning Framework for Robust and Safe Humanoid Walking. Huang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2508.20661)
-- RuN: Residual Policy for Natural Humanoid Locomotion. Li et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.20696)
-- Learning Humanoid Standing-up Control Across Diverse Postures. Huang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.08378)
-- Learning Getting-up Policies for Real-World Humanoid Robots. He et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.12152)
-- FRASA: An End-to-End Reinforcement Learning Agent for Fall Recovery and Stand Up of Humanoid Robots. Gaspard et al. ICRA, 2025. [Paper](https://jglobal.jst.go.jp/en/public/202502215189879077) [Code](https://github.com/Rhoban/frasa)
-- HWC-Loco: A Hierarchical Whole-Body Control Approach to Robust Humanoid Locomotion. Lin et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2503.00923)
-- HuB: Learning Extreme Humanoid Balance. Zhang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.07294)
-- Hold My Beer: Learning Gentle Humanoid Locomotion and End-Effector Stabilization Control. Li et al. CoRL, 2025. [Paper](https://proceedings.mlr.press/v305/li25i.html) [Project](https://lecar-lab.github.io/SoFTA/)
+| Stage | Main questions in the survey | Representative resources |
+| --- | --- | --- |
+| Data acquisition and construction | Where do motion priors come from, and how are they retargeted, filtered, and augmented? | AMASS, PHUMA, Motion-X++, WHAM, OmniRetarget |
+| Policy learning and architecture design | Which training paradigm best fits the task: RL, imitation, hierarchical control, diffusion, latent modeling, or BFMs? | Real-World RL, ExBody2, HOVER, BeyondMimic, BFM-Zero |
+| Simulation transfer and deployment | Which simulator, transfer strategy, and hardware adaptation stack support real deployment? | Isaac Gym, Isaac Lab, MuJoCo, Genesis, HumanoidVerse |
 
-### Whole-Body Control and Motion Tracking
+## Command-based Control
 
-- GMT: General Motion Tracking for Humanoid Whole-Body Control. Chen et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2506.14770)
-- UniTracker: Learning Universal Whole-Body Motion Tracker for Humanoid Robots. Yin et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2507.07356)
-- Track Any Motions Under Any Disturbances. Zhang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.13833)
-- Behavior Foundation Model for Humanoid Robots. Zeng et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.13780)
-- SMAP: Self-supervised Motion Adaptation for Physically Plausible Humanoid Whole-body Control. Zhao et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.19463)
-- KungfuBot: Physics-Based Humanoid Whole-Body Control for Learning Highly-Dynamic Skills. Xie et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2506.12851)
-- KungfuBot2: Learning Versatile Motion Skills for Humanoid Whole-Body Control. Han et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.16638)
-- BeyondMimic: From Motion Tracking to Versatile Humanoid Control via Guided Diffusion. Liao et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2508.08241)
-- SoftMimic: Learning Compliant Whole-Body Control from Examples. Margolis et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.17792)
-- ASAP: Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills. He et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.01143)
-- Visual Imitation Enables Contextual Humanoid Control. Allshire et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.03729) [Project](https://videomimic.github.io/)
-- HDMI: Learning Interactive Humanoid Whole-Body Control from Human Videos. Weng et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.16757)
-- Towards Adaptable Humanoid Control via Adaptive Motion Tracking. Huang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.14454)
-- Adversarial Locomotion and Motion Imitation for Humanoid Policy Learning. Shi et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2504.14305)
-- Embrace Collisions: Humanoid Shadowing for Deployable Contact-Agnostic Motions. Zhuang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.01465)
-- HOVER: Versatile Neural Whole-Body Controller for Humanoid Robots. He et al. ICRA, 2025. [Paper](https://arxiv.org/abs/2410.21229) [Project](https://hover-versatile-humanoid.github.io/)
-- JAEGER: Dual-Level Humanoid Whole-Body Controller. Ding et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.06584)
-- AMO: Adaptive Motion Optimization for Hyper-Dexterous Humanoid Whole-Body Control. Li et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.03738)
-- Agility Meets Stability: Versatile Humanoid Control with Heterogeneous Data. Pan et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2511.17373)
-- SONIC: Supersizing Motion Tracking for Natural Humanoid Whole-Body Control. Luo et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2511.07820)
+| Title | Venue | Year | Focus | Links |
+| --- | --- | --- | --- | --- |
+| Learning Natural Locomotion Behaviors for Humanoid Robots using Human Bias | RA-L | 2020 | Early learning-based natural locomotion prior | [Paper](https://www.research.ed.ac.uk/en/publications/learning-natural-locomotion-behaviors-for-humanoid-robots-using-h) |
+| Real-World Humanoid Locomotion with Reinforcement Learning | Science Robotics | 2024 | Real-robot locomotion with RL | [Paper](https://arxiv.org/abs/2303.03381) / [Project](https://learning-humanoid-locomotion.github.io/) |
+| Advancing Humanoid Locomotion: Mastering Challenging Terrains with Denoising World Model Learning | arXiv | 2024 | Challenging terrain locomotion with latent world-model guidance | [Paper](https://arxiv.org/abs/2408.14472) |
+| Learn to Teach: Sample-Efficient Privileged Learning for Humanoid Locomotion over Diverse Terrains | arXiv | 2024 | Privileged teacher-student terrain learning | [Paper](https://arxiv.org/abs/2402.06783) |
+| Revisiting Reward Design and Evaluation for Robust Humanoid Standing and Walking | IROS | 2024 | Reward-design analysis for standing and walking | [Paper](https://doi.org/10.1109/IROS58592.2024.10802680) |
+| Learning Humanoid Locomotion over Challenging Terrain | arXiv | 2024 | Terrain locomotion benchmark-style formulation | [Paper](https://arxiv.org/abs/2410.03654) |
+| Learning Humanoid Locomotion with Perceptive Internal Model | ICRA | 2025 | Terrain-aware locomotion with internal perceptive model | [Paper](https://junfeng-long.github.io/PIM/) |
+| BeamDojo: Learning Agile Humanoid Locomotion on Sparse Footholds | arXiv | 2025 | Sparse foothold locomotion | [Paper](https://arxiv.org/abs/2502.10363) |
+| A Unified and General Humanoid Whole-Body Controller for Versatile Locomotion | arXiv | 2025 | Unified locomotion controller | [Paper](https://arxiv.org/abs/2502.03206) |
+| Gait-Conditioned Reinforcement Learning with Multi-Phase Curriculum for Humanoid Locomotion | arXiv | 2025 | Gait-conditioned curriculum design | [Paper](https://arxiv.org/abs/2505.20619) |
+| Humanoid Whole-Body Locomotion on Narrow Terrain via Dynamic Balance and Reinforcement Learning | arXiv | 2025 | Dynamic balance on narrow terrain | [Paper](https://arxiv.org/abs/2502.17219) |
+| Traversing Narrow Paths: A Two-Stage Reinforcement Learning Framework for Robust and Safe Humanoid Walking | arXiv | 2025 | Safe narrow-path walking | [Paper](https://arxiv.org/abs/2508.20661) |
+| HWC-Loco: A Hierarchical Whole-Body Control Approach to Robust Humanoid Locomotion | arXiv | 2025 | Hierarchical locomotion control | [Paper](https://arxiv.org/abs/2503.00923) |
+| Chasing Stability: Humanoid Running via Control Lyapunov Function Guided Reinforcement Learning | arXiv | 2025 | CLF-guided running | [Paper](https://arxiv.org/abs/2509.19573) |
+| HuB: Learning Extreme Humanoid Balance | arXiv | 2025 | Extreme balance and recovery | [Paper](https://arxiv.org/abs/2505.07294) |
+| Learning Humanoid Standing-up Control Across Diverse Postures | arXiv | 2025 | Stand-up control from diverse initial states | [Paper](https://arxiv.org/abs/2502.08378) |
+| Learning Getting-up Policies for Real-World Humanoid Robots | arXiv | 2025 | Real-world getting-up deployment | [Paper](https://arxiv.org/abs/2502.12152) |
+| FRASA: An End-to-End Reinforcement Learning Agent for Fall Recovery and Stand Up of Humanoid Robots | ICRA | 2025 | Fall recovery and stand-up | [Paper](https://jglobal.jst.go.jp/en/public/202502215189879077) / [Code](https://github.com/Rhoban/frasa) |
+| Hold My Beer: Learning Gentle Humanoid Locomotion and End-Effector Stabilization Control | CoRL | 2025 | Locomotion with stabilized upper body | [Paper](https://proceedings.mlr.press/v305/li25i.html) / [Project](https://lecar-lab.github.io/SoFTA/) |
+| CLF-RL: Control Lyapunov Function Guided Reinforcement Learning | RA-L | 2026 | Formal-stability-guided RL | [Paper](https://www.zacholkin.com/research/clf_rl/) |
+| OmniXtreme: Breaking the Generality Barrier in High-Dynamic Humanoid Control | arXiv | 2026 | Highly dynamic general-purpose control | [Paper](https://arxiv.org/abs/2602.23843) |
 
-### Teleoperation, Imitation, and Retargeting
+## Motion Tracking-based Control
 
-- TWIST: Teleoperated Whole-Body Imitation System. Ze et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.02833)
-- Mobile-TeleVision: Predictive Motion Priors for Humanoid Whole-Body Control. Lu et al. ICRA, 2025. [Paper](https://arxiv.org/abs/2412.07773) [Project](https://mobile-tv.github.io/)
-- CLONE: Closed-Loop Whole-Body Humanoid Teleoperation for Long-Horizon Tasks. Li et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2506.08931)
-- Homie: Humanoid Loco-Manipulation with Isomorphic Exoskeleton Cockpit. Ben et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2502.13013)
-- Retargeting Matters: General Motion Retargeting for Humanoid Motion Tracking. Araujo et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.02252)
-- OmniRetarget: Interaction-preserving Data Generation for Humanoid Whole-Body Loco-Manipulation and Scene Interaction. Yang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.26633)
-- Implicit Kinodynamic Motion Retargeting for Human-to-Humanoid Imitation Learning. Chen et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.15443)
+| Title | Venue | Year | Focus | Links |
+| --- | --- | --- | --- | --- |
+| Whole-Body Humanoid Robot Locomotion with Human Reference | IROS | 2024 | Human-reference locomotion tracking | [Paper](https://arxiv.org/abs/2402.18294) |
+| Expressive Whole-Body Control for Humanoid Robots | arXiv | 2024 | Expressive motion imitation baseline | [Paper](https://arxiv.org/abs/2402.16796) |
+| ExBody2: Advanced Expressive Humanoid Whole-Body Control | arXiv | 2024 | Large-scale expressive tracking | [Paper](https://arxiv.org/abs/2412.13196) |
+| HumanMimic: Learning Natural Locomotion and Transitions for Humanoid Robot via Wasserstein Adversarial Imitation | ICRA | 2024 | Adversarial imitation for natural locomotion | [Paper](https://arxiv.org/abs/2309.14225) |
+| Learning Human-to-Humanoid Real-Time Whole-Body Teleoperation | IROS | 2024 | Real-time teleoperation pipeline | [Paper](https://arxiv.org/abs/2403.04436) / [Project](https://human2humanoid.com/) |
+| OmniH2O: Universal and Dexterous Human-to-Humanoid Whole-Body Teleoperation and Learning | arXiv | 2024 | Unified teleoperation and learning system | [Paper](https://arxiv.org/abs/2406.08858) / [Project](https://omni.human2humanoid.com/) |
+| HumanPlus: Humanoid Shadowing and Imitation from Humans | arXiv | 2024 | Human shadowing and imitation | [Paper](https://arxiv.org/abs/2406.10454) |
+| Learning from Massive Human Videos for Universal Humanoid Pose Control | arXiv | 2024 | Large-scale video-derived motion prior | [Paper](https://arxiv.org/abs/2412.14172) |
+| GMT: General Motion Tracking for Humanoid Whole-Body Control | arXiv | 2025 | Multi-motion tracking and robustness | [Paper](https://arxiv.org/abs/2506.14770) |
+| UniTracker: Learning Universal Whole-Body Motion Tracker for Humanoid Robots | arXiv | 2025 | Universal motion tracker | [Paper](https://arxiv.org/abs/2507.07356) |
+| Track Any Motions Under Any Disturbances | arXiv | 2025 | Disturbance-robust tracking | [Paper](https://arxiv.org/abs/2509.13833) |
+| HOVER: Versatile Neural Whole-Body Controller for Humanoid Robots | ICRA | 2025 | Unified whole-body controller | [Paper](https://arxiv.org/abs/2410.21229) / [Project](https://hover-versatile-humanoid.github.io/) |
+| SMAP: Self-supervised Motion Adaptation for Physically Plausible Humanoid Whole-body Control | arXiv | 2025 | Motion adaptation across embodiment gap | [Paper](https://arxiv.org/abs/2505.19463) |
+| KungfuBot: Physics-Based Humanoid Whole-Body Control for Learning Highly-Dynamic Skills | arXiv | 2025 | High-dynamic skill tracking | [Paper](https://arxiv.org/abs/2506.12851) |
+| KungfuBot2: Learning Versatile Motion Skills for Humanoid Whole-Body Control | arXiv | 2025 | Versatile high-dynamic motion skills | [Paper](https://arxiv.org/abs/2509.16638) |
+| BeyondMimic: From Motion Tracking to Versatile Humanoid Control via Guided Diffusion | arXiv | 2025 | Diffusion-based motion tracking | [Paper](https://arxiv.org/abs/2508.08241) |
+| ASAP: Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills | arXiv | 2025 | Sim-to-real alignment for imitation-style skills | [Paper](https://arxiv.org/abs/2502.01143) |
+| HDMI: Learning Interactive Humanoid Whole-Body Control from Human Videos | arXiv | 2025 | Video-driven whole-body control | [Paper](https://arxiv.org/abs/2509.16757) |
+| Mobile-TeleVision: Predictive Motion Priors for Humanoid Whole-Body Control | ICRA | 2025 | Motion priors for teleoperation | [Paper](https://arxiv.org/abs/2412.07773) / [Project](https://mobile-tv.github.io/) |
+| TWIST: Teleoperated Whole-Body Imitation System | arXiv | 2025 | Teleoperated imitation and deployment | [Paper](https://arxiv.org/abs/2505.02833) |
+| CLONE: Closed-Loop Whole-Body Humanoid Teleoperation for Long-Horizon Tasks | arXiv | 2025 | Closed-loop long-horizon teleoperation | [Paper](https://arxiv.org/abs/2506.08931) |
+| Homie: Humanoid Loco-Manipulation with Isomorphic Exoskeleton Cockpit | arXiv | 2025 | Exoskeleton-based teleoperation | [Paper](https://arxiv.org/abs/2502.13013) |
+| Retargeting Matters: General Motion Retargeting for Humanoid Motion Tracking | arXiv | 2025 | General-purpose retargeting pipeline | [Paper](https://arxiv.org/abs/2510.02252) |
+| Towards Adaptable Humanoid Control via Adaptive Motion Tracking | arXiv | 2025 | Motion-tracking-driven adaptation | [Paper](https://arxiv.org/abs/2510.14454) |
+| SONIC: Supersizing Motion Tracking for Natural Humanoid Whole-Body Control | arXiv | 2025 | Scaling motion tracking with more data and model capacity | [Paper](https://arxiv.org/abs/2511.07820) |
 
-### Loco-Manipulation and Scene Interaction
+## Interaction-based Control
 
-- Falcon: Learning Force-Adaptive Humanoid Loco-Manipulation. Zhang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.06776)
-- Unleashing Humanoid Reaching Potential via Real-world-Ready Skill Space. Zhang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2505.10918)
-- ResMimic: From General Motion Tracking to Humanoid Whole-Body Loco-Manipulation via Residual Learning. Zhao et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.05070)
-- Learning Human-Humanoid Coordination for Collaborative Object Carrying. Du et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.14293)
-- TrajBooster: Boosting Humanoid Whole-Body Manipulation via Trajectory-Centric Learning. Liu et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.11839)
-- VisualMimic: Visual Humanoid Loco-Manipulation via Motion Tracking and Generation. Yin et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.20322)
-- Embracing Bulky Objects with Humanoid Robots: Whole-Body Manipulation with Reinforcement Learning. Zheng et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.13534)
-- Opt2Skill: Imitating Dynamically-feasible Whole-Body Trajectories for Versatile Humanoid Loco-Manipulation. Liu et al. RA-L, 2025. [Paper](https://arxiv.org/abs/2409.20514) [Project](https://opt2skill.github.io/)
-- DreamControl: Human-inspired Whole-Body Humanoid Control for Scene Interaction via Guided Diffusion. Kalaria et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.14353)
-- StageACT: Stage-Conditioned Imitation for Robust Humanoid Door Opening. Lee et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.13200)
-- PhySHSI: Towards a Real-World Generalizable and Natural Humanoid-Scene Interaction System. Wang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.11072)
-- Hand-Eye Autonomous Delivery: Learning Humanoid Navigation, Locomotion and Reaching. Chen et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2508.03068)
-- Hitter: A Humanoid Table Tennis Robot via Hierarchical Planning and Learning. Su et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2508.21043)
-- SEEC: Stable End-Effector Control with Model-Enhanced Residual Learning for Humanoid Loco-Manipulation. Jang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2509.21231) [Project](https://seec-humanoid.github.io/)
-- DemoHLM: From One Demonstration to Generalizable Humanoid Loco-Manipulation. Fu et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.11258)
-- Opening the Sim-to-Real Door for Humanoid Pixel-to-Action Policy Transfer. Xue et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2512.01061)
+| Title | Venue | Year | Focus | Links |
+| --- | --- | --- | --- | --- |
+| Wococo: Learning Whole-Body Humanoid Control with Sequential Contacts | arXiv | 2024 | Sequential-contact whole-body control | [Paper](https://arxiv.org/abs/2406.06005) |
+| CooHOI: Learning Cooperative Human-Object Interaction with Manipulated Object Dynamics | NeurIPS | 2024 | Human-object interaction prior | [Paper](https://papers.nips.cc/paper_files/paper/2024/hash/8ff154c486ef2f73894f7d0ee7ee8f54-Abstract-Conference.html) |
+| Sim-to-Real Learning for Humanoid Box Loco-Manipulation | ICRA | 2024 | Box carrying and loco-manipulation | [Paper](https://ieeexplore.ieee.org/document/10611502) |
+| OKAMI: Teaching Humanoid Robots Manipulation Skills through Single Video Imitation | arXiv | 2024 | Single-video manipulation imitation | [Paper](https://arxiv.org/abs/2410.11792) / [Project](https://ut-austin-rpl.github.io/OKAMI/) |
+| ULC: A Unified and Fine-Grained Controller for Humanoid Loco-Manipulation | arXiv | 2025 | Unified locomotion and manipulation | [Paper](https://arxiv.org/abs/2507.06905) |
+| AMO: Adaptive Motion Optimization for Hyper-Dexterous Humanoid Whole-Body Control | arXiv | 2025 | Optimization-guided whole-body manipulation | [Paper](https://arxiv.org/abs/2505.03738) |
+| Falcon: Learning Force-Adaptive Humanoid Loco-Manipulation | arXiv | 2025 | Force-adaptive interaction | [Paper](https://arxiv.org/abs/2505.06776) |
+| Unleashing Humanoid Reaching Potential via Real-world-Ready Skill Space | arXiv | 2025 | Reaching skill space for deployment | [Paper](https://arxiv.org/abs/2505.10918) |
+| ResMimic: From General Motion Tracking to Humanoid Whole-Body Loco-Manipulation via Residual Learning | arXiv | 2025 | Residual learning for loco-manipulation | [Paper](https://arxiv.org/abs/2510.05070) |
+| Learning Human-Humanoid Coordination for Collaborative Object Carrying | arXiv | 2025 | Human-robot collaborative carrying | [Paper](https://arxiv.org/abs/2510.14293) |
+| TrajBooster: Boosting Humanoid Whole-Body Manipulation via Trajectory-Centric Learning | arXiv | 2025 | Trajectory-centric manipulation learning | [Paper](https://arxiv.org/abs/2509.11839) |
+| VisualMimic: Visual Humanoid Loco-Manipulation via Motion Tracking and Generation | arXiv | 2025 | Visual loco-manipulation | [Paper](https://arxiv.org/abs/2509.20322) |
+| Embracing Bulky Objects with Humanoid Robots: Whole-Body Manipulation with Reinforcement Learning | arXiv | 2025 | Bulky-object manipulation | [Paper](https://arxiv.org/abs/2509.13534) |
+| Opt2Skill: Imitating Dynamically-feasible Whole-Body Trajectories for Versatile Humanoid Loco-Manipulation | RA-L | 2025 | Dynamically feasible trajectory imitation | [Paper](https://arxiv.org/abs/2409.20514) / [Project](https://opt2skill.github.io/) |
+| DreamControl: Human-inspired Whole-Body Humanoid Control for Scene Interaction via Guided Diffusion | arXiv | 2025 | Scene interaction with guided diffusion | [Paper](https://arxiv.org/abs/2509.14353) |
+| StageACT: Stage-Conditioned Imitation for Robust Humanoid Door Opening | arXiv | 2025 | Long-horizon door-opening interaction | [Paper](https://arxiv.org/abs/2509.13200) |
+| PhySHSI: Towards a Real-World Generalizable and Natural Humanoid-Scene Interaction System | arXiv | 2025 | Scene interaction system | [Paper](https://arxiv.org/abs/2510.11072) |
+| Hand-Eye Autonomous Delivery: Learning Humanoid Navigation, Locomotion and Reaching | arXiv | 2025 | Navigation + reaching in one policy stack | [Paper](https://arxiv.org/abs/2508.03068) |
+| Hitter: A Humanoid Table Tennis Robot via Hierarchical Planning and Learning | arXiv | 2025 | Skill hierarchy for sports interaction | [Paper](https://arxiv.org/abs/2508.21043) |
+| SEEC: Stable End-Effector Control with Model-Enhanced Residual Learning for Humanoid Loco-Manipulation | arXiv | 2025 | Stable end-effector control | [Paper](https://arxiv.org/abs/2509.21231) / [Project](https://seec-humanoid.github.io/) |
+| DemoHLM: From One Demonstration to Generalizable Humanoid Loco-Manipulation | arXiv | 2025 | One-shot demonstration to generalization | [Paper](https://arxiv.org/abs/2510.11258) |
 
-### Language-Conditioned and Foundation Models
+## Multimodal Learning-based Control
 
-- LangWBC: Language-directed Humanoid Whole-Body Control via End-to-end Learning. Shao et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2504.21738)
-- LeverB: Humanoid Whole-Body Control with Latent Vision-Language Instruction. Xue et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2506.13751)
-- From Language to Locomotion: Retargeting-free Humanoid Control via Motion Latent Guidance. Li et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.14952)
-- Sentinel: A Fully End-to-End Language-Action Model for Humanoid Whole Body Control. Wang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2511.19236)
-- Commanding Humanoid by Free-form Language: A Large Language Action Model with Unified Motion Vocabulary. Liu et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2511.22963)
-- BFM-Zero: A Promptable Behavioral Foundation Model for Humanoid Control using Unsupervised Reinforcement Learning. Li et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2511.04131)
-- UniAct: Unified Motion Generation and Action Streaming for Humanoid Robots. Jiang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2512.24321)
+| Title | Venue | Year | Modality | Links |
+| --- | --- | --- | --- | --- |
+| Humanoid Parkour Learning | arXiv | 2024 | Vision-to-action locomotion | [Paper](https://arxiv.org/abs/2406.10759) |
+| Generalizable Humanoid Manipulation with Improved 3D Diffusion Policies | arXiv | 2024 | 3D visual diffusion policy | [Paper](https://arxiv.org/abs/2410.10803) |
+| Harmon: Whole-Body Motion Generation of Humanoid Robots from Language Descriptions | arXiv | 2024 | Language-to-motion generation | [Paper](https://arxiv.org/abs/2410.12773) / [Project](https://ut-austin-rpl.github.io/Harmon/) |
+| Visual Imitation Enables Contextual Humanoid Control | arXiv | 2025 | Video-conditioned contextual control | [Paper](https://arxiv.org/abs/2505.03729) / [Project](https://videomimic.github.io/) |
+| LangWBC: Language-directed Humanoid Whole-Body Control via End-to-end Learning | arXiv | 2025 | Language-conditioned whole-body control | [Paper](https://arxiv.org/abs/2504.21738) |
+| LeverB: Humanoid Whole-Body Control with Latent Vision-Language Instruction | arXiv | 2025 | Vision-language latent control | [Paper](https://arxiv.org/abs/2506.13751) |
+| From Language to Locomotion: Retargeting-free Humanoid Control via Motion Latent Guidance | arXiv | 2025 | Language-to-locomotion with latent guidance | [Paper](https://arxiv.org/abs/2510.14952) |
+| Sentinel: A Fully End-to-End Language-Action Model for Humanoid Whole Body Control | arXiv | 2025 | End-to-end language-action model | [Paper](https://arxiv.org/abs/2511.19236) |
+| Commanding Humanoid by Free-form Language: A Large Language Action Model with Unified Motion Vocabulary | arXiv | 2025 | Free-form language control | [Paper](https://arxiv.org/abs/2511.22963) |
+| BFM-Zero: A Promptable Behavioral Foundation Model for Humanoid Control using Unsupervised Reinforcement Learning | arXiv | 2025 | Promptable behavior foundation model | [Paper](https://arxiv.org/abs/2511.04131) |
+| UniAct: Unified Motion Generation and Action Streaming for Humanoid Robots | arXiv | 2025 | Unified generation and action streaming | [Paper](https://arxiv.org/abs/2512.24321) |
+| Opening the Sim-to-Real Door for Humanoid Pixel-to-Action Policy Transfer | arXiv | 2025 | Vision-based pixel-to-action transfer | [Paper](https://arxiv.org/abs/2512.01061) |
+| FRoM-W1: Towards General Humanoid Whole-Body Control with Language Instructions | arXiv | 2026 | Language-conditioned general WBC | [Paper](https://arxiv.org/abs/2601.12799) |
+| HumanX: Toward Agile and Generalizable Humanoid Interaction Skills from Human Videos | arXiv | 2026 | Large-scale human-video-driven interaction skill learning | [Paper](https://arxiv.org/abs/2602.02473) |
 
-### Simulators, Datasets, Surveys, and Background
+## Motion Data, Retargeting, and Perception Assets
 
-- Humanoid Locomotion and Manipulation: Current Progress and Challenges in Control, Planning, and Learning. Gu et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2501.02116)
-- Learning-based Legged Locomotion: State of the Art and Future Perspectives. Ha et al. IJRR, 2025. [Paper](https://doi.org/10.1177/02783649241312698)
-- Deep Reinforcement Learning for Robotics: A Survey of Real-World Successes. Tang et al. AAAI, 2025. [Paper](https://doi.org/10.1609/aaai.v39i27.35095)
-- Isaac Lab: A GPU-accelerated Simulation Framework for Multi-Modal Robot Learning. Mittal et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2511.04831) [Code](https://github.com/isaac-sim/IsaacLab)
-- PHUMA: Physically-grounded Humanoid Locomotion Dataset. Lee et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2510.26236)
-- Motion-X++: A Large-Scale Multimodal 3D Whole-body Human Motion Dataset. Zhang et al. arXiv, 2025. [Paper](https://arxiv.org/abs/2501.05098)
-- Go to Zero: Towards Zero-shot Motion Generation with Million-scale Data. Fan et al. ICCV, 2025. [Paper](https://arxiv.org/abs/2507.07095)
-- InterMimic: Towards Universal Whole-Body Control for Physics-Based Human-Object Interactions. Xu et al. CVPR, 2025. [Paper](https://arxiv.org/abs/2502.20390) [Project](https://sirui-xu.github.io/InterMimic/)
-- ModSkill: Physical Character Skill Modularization. Huang et al. ICCV, 2025. [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Huang_ModSkill_Physical_Character_Skill_Modularization_ICCV_2025_paper.html)
-- Diffusion Policy: Visuomotor Policy Learning via Action Diffusion. Chi et al. IJRR, 2025. [Paper](https://arxiv.org/abs/2303.04137)
-- Learning Multi-Modal Whole-Body Control for Real-World Humanoid Robots. Dugar et al. AAAI Symposium, 2025. [Paper](https://arxiv.org/abs/2408.07295) [Project](https://masked-humanoid.github.io/mhc/)
+| Resource | Type | Why it matters | Links |
+| --- | --- | --- | --- |
+| AMASS | Dataset | Canonical large-scale MoCap corpus for motion priors | [Project](https://amass.is.tue.mpg.de/) |
+| HumanML3D | Dataset | Motion-language alignment for language-conditioned control | [Paper](https://arxiv.org/abs/2206.10659) |
+| OMOMO | Dataset | Human-object interaction data for interaction-rich tasks | [Paper](https://arxiv.org/abs/2301.07553) |
+| PHUMA | Dataset | Robot-oriented physically grounded humanoid locomotion dataset | [Paper](https://arxiv.org/abs/2510.26236) |
+| Motion-X++ | Dataset | Large-scale multimodal whole-body human motion data | [Paper](https://arxiv.org/abs/2501.05098) |
+| Go to Zero / MotionMillion | Dataset | Million-scale motion generation data source | [Paper](https://arxiv.org/abs/2507.07095) |
+| NTU RGB+D / NTU RGB+D 120 | Dataset | Human activity understanding benchmark useful for multimodal pretraining | [NTU RGB+D](https://rose1.ntu.edu.sg/dataset/actionRecognition/) / [NTU 120](https://arxiv.org/abs/1905.04757) |
+| WHAM | Human motion recovery | Widely used video-to-motion reconstruction system | [Project](https://wham.is.tue.mpg.de/) |
+| GVHMR | Human motion recovery | World-grounded motion recovery from video | [Paper](https://arxiv.org/abs/2409.06661) |
+| TRAM | Human trajectory recovery | Global trajectory reconstruction for video-derived motion | [Paper](https://arxiv.org/abs/2403.17346) |
+| HybrIK | Human pose estimation | Real-time pose estimation pipeline used in teleoperation and imitation | [Paper](https://arxiv.org/abs/2011.14672) / [Code](https://github.com/jeffffffli/HybrIK) |
+| Retargeting Matters (GMR) | Retargeting | General motion retargeting reference for humanoids | [Paper](https://arxiv.org/abs/2510.02252) |
+| OmniRetarget | Retargeting | Interaction-preserving retargeting and data generation | [Paper](https://arxiv.org/abs/2509.26633) |
+| Implicit Kinodynamic Motion Retargeting | Retargeting | Learned implicit retargeting with dynamics awareness | [Paper](https://arxiv.org/abs/2509.15443) |
+| FLD | Motion representation | Latent motion representation useful for structured control | [Paper](https://arxiv.org/abs/2402.13820) |
+| Diffusion Policy | Action-generation background | Core action diffusion reference for downstream humanoid work | [Paper](https://arxiv.org/abs/2303.04137) |
 
-## 2024
+## Simulators and Open-Source Frameworks
 
-### Locomotion
+| Resource | Type | Use case | Links |
+| --- | --- | --- | --- |
+| Isaac Gym | Simulator | High-throughput GPU RL training | [Paper](https://arxiv.org/abs/2108.10470) |
+| Isaac Lab | Simulator / framework | Modern Isaac-based multi-modal robot learning stack | [Paper](https://arxiv.org/abs/2511.04831) / [Code](https://github.com/isaac-sim/IsaacLab) |
+| MuJoCo | Simulator | High-fidelity contact dynamics and control benchmarking | [Paper](https://ieeexplore.ieee.org/document/6386109) |
+| Genesis | Simulator | Emerging unified high-performance simulator | [Paper](https://arxiv.org/abs/2401.01454) |
+| HumanoidVerse | Framework | Multi-simulator training and sim-to-real experiments | [Repo](https://github.com/LeCAR-Lab/HumanoidVerse) |
+| ProtoMotions3 | Framework | Open-source humanoid simulation and control stack | [Repo](https://github.com/NVLabs/ProtoMotions/) |
+| MuJoCo Playground | Framework | Lightweight GPU-accelerated robot learning framework | [Repo](https://github.com/google-deepmind/mujoco_playground) |
+| Motion-X | Dataset / code | Practical data and code release for motion learning | [Repo](https://github.com/IDEA-Research/Motion-X) |
 
-- Advancing Humanoid Locomotion: Mastering Challenging Terrains with Denoising World Model Learning. Gu et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2408.14472)
-- Revisiting Reward Design and Evaluation for Robust Humanoid Standing and Walking. van Marum et al. IROS, 2024. [Paper](https://doi.org/10.1109/IROS58592.2024.10802680)
-- Real-World Humanoid Locomotion with Reinforcement Learning. Radosavovic et al. Science Robotics, 2024. [Paper](https://arxiv.org/abs/2303.03381) [Project](https://learning-humanoid-locomotion.github.io/)
-- Learn to Teach: Sample-Efficient Privileged Learning for Humanoid Locomotion over Diverse Terrains. Wu et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2402.06783)
-- Learning Humanoid Locomotion over Challenging Terrain. Radosavovic et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2410.03654)
-- Whole-Body Humanoid Robot Locomotion with Human Reference. Zhang et al. IROS, 2024. [Paper](https://arxiv.org/abs/2402.18294)
-- HumanMimic: Learning Natural Locomotion and Transitions for Humanoid Robot via Wasserstein Adversarial Imitation. Tang et al. ICRA, 2024. [Paper](https://arxiv.org/abs/2309.14225)
-- Humanoid Parkour Learning. Zhuang et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2406.10759)
+## Surveys and Background
 
-### Whole-Body Control and Motion Priors
-
-- Expressive Whole-Body Control for Humanoid Robots. Cheng et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2402.16796)
-- ExBody2: Advanced Expressive Humanoid Whole-Body Control. Ji et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2412.13196)
-- FLD: Fourier Latent Dynamics for Structured Motion Representation and Learning. Li et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2402.13820)
-- HumanPlus: Humanoid Shadowing and Imitation from Humans. Fu et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2406.10454)
-- I-CTRL: Imitation to Control Humanoid Robots through Constrained Reinforcement Learning. Yan et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2405.08726)
-- Learning from Massive Human Videos for Universal Humanoid Pose Control. Mao et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2412.14172)
-- Wococo: Learning Whole-Body Humanoid Control with Sequential Contacts. Zhang et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2406.06005)
-
-### Teleoperation, Imitation, and Retargeting
-
-- Learning Human-to-Humanoid Real-Time Whole-Body Teleoperation. He et al. IROS, 2024. [Paper](https://arxiv.org/abs/2403.04436) [Project](https://human2humanoid.com/)
-- OmniH2O: Universal and Dexterous Human-to-Humanoid Whole-Body Teleoperation and Learning. He et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2406.08858) [Project](https://omni.human2humanoid.com/)
-- Open-TeleVision: Teleoperation with Immersive Active Visual Feedback. Cheng et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2407.01512)
-
-### Manipulation, Scene Interaction, and Diffusion-based Control
-
-- Generalizable Humanoid Manipulation with Improved 3D Diffusion Policies. Ze et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2410.10803)
-- CooHOI: Learning Cooperative Human-Object Interaction with Manipulated Object Dynamics. Gao et al. NeurIPS, 2024. [Paper](https://papers.nips.cc/paper_files/paper/2024/hash/8ff154c486ef2f73894f7d0ee7ee8f54-Abstract-Conference.html)
-- Sim-to-Real Learning for Humanoid Box Loco-Manipulation. Dao et al. ICRA, 2024. [Paper](https://ieeexplore.ieee.org/document/10611502)
-- OKAMI: Teaching Humanoid Robots Manipulation Skills through Single Video Imitation. Li et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2410.11792) [Project](https://ut-austin-rpl.github.io/OKAMI/)
-- Harmon: Whole-Body Motion Generation of Humanoid Robots from Language Descriptions. Jiang et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2410.12773) [Project](https://ut-austin-rpl.github.io/Harmon/)
-- Adaptive-Frequency Model Learning and Predictive Control for Dynamic Maneuvers on Legged Robots. Nguyen et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2407.14749)
-
-### Surveys, Human Motion, and Supporting Infrastructure
-
-- Learning Robot Soccer from Egocentric Vision with Deep Reinforcement Learning. Tirumala et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2405.02425)
-- Learning Agile Soccer Skills for a Bipedal Robot with Deep Reinforcement Learning. Haarnoja et al. Science Robotics, 2024. [Paper](https://arxiv.org/abs/2304.13653)
-- Advancements in Humanoid Robots: A Comprehensive Review and Future Prospects. Tong et al. IEEE/CAA Journal of Automatica Sinica, 2024. [Paper](https://doi.org/10.1109/JAS.2024.124237)
-- WHAM: Reconstructing World-grounded Humans with Accurate 3D Motion. Shin et al. CVPR, 2024. [Paper](https://wham.is.tue.mpg.de/)
-- World-Grounded Human Motion Recovery via Gravity-View Coordinates. Shen et al. SIGGRAPH Asia, 2024. [Paper](https://arxiv.org/abs/2409.06661)
-- TRAM: Global Trajectory and Motion of 3D Humans from In-the-Wild Videos. Wang et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2403.17346)
-- Genesis: A Generative and Universal Physics Engine for Robotics and Beyond. Zhou et al. arXiv, 2024. [Paper](https://arxiv.org/abs/2401.01454)
-
-## 2023
-
-### Humanoid Control
-
-- Learning Bipedal Walking for Humanoids with Current Feedback. Xie et al. IEEE Access, 2023. [Paper](https://ieeexplore.ieee.org/document/10245056)
-- Perpetual Humanoid Control for Real-time Simulated Avatars. Luo et al. ICCV, 2023. [Paper](https://openaccess.thecvf.com/content/ICCV2023/html/Luo_Perpetual_Humanoid_Control_for_Real-time_Simulated_Avatars_ICCV_2023_paper.html)
-- Universal Humanoid Motion Representations for Physics-Based Control. Luo et al. arXiv, 2023. [Paper](https://arxiv.org/abs/2310.04582)
-
-### Human Motion Models and Retargeting Context
-
-- Object Motion Guided Human Motion Synthesis. Li et al. TOG, 2023. [Paper](https://arxiv.org/abs/2309.16237)
-- SMPL: A Skinned Multi-Person Linear Model. Loper et al. Seminal Graphics Papers, 2023. [Paper](https://smpl.is.tue.mpg.de/)
-- Generating Human Motion from Textual Descriptions with Discrete Representations. Zhang et al. CVPR, 2023. [Paper](https://arxiv.org/abs/2301.06052)
-
-## 2022 and Earlier
-
-### Humanoid and Legged Learning
-
-- Learning Natural Locomotion Behaviors for Humanoid Robots using Human Bias. Yang et al. RA-L, 2020. [Paper](https://www.research.ed.ac.uk/en/publications/learning-natural-locomotion-behaviors-for-humanoid-robots-using-h)
-- Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning. Rudin et al. arXiv, 2022. [Paper](https://arxiv.org/abs/2109.11978)
-- Isaac Gym: High Performance GPU-Based Physics Simulation for Robot Learning. Makoviychuk et al. arXiv, 2021. [Paper](https://arxiv.org/abs/2108.10470)
-- MuJoCo: A Physics Engine for Model-Based Control. Todorov et al. IROS, 2012. [Paper](https://ieeexplore.ieee.org/document/6386109)
-
-### Human Motion Datasets and Perception
-
-- AMASS: Archive of Motion Capture as Surface Shapes. Mahmood et al. ICCV, 2019. [Paper](https://amass.is.tue.mpg.de/) [Project](https://is.mpg.de/ps/publications/amass-iccv-2019)
-- Robust Motion In-betweening. Harvey et al. TOG, 2020. [Paper](https://arxiv.org/abs/2002.04900)
-- Generating Diverse and Natural 3D Human Motions from Text. Guo et al. CVPR, 2022. [Paper](https://arxiv.org/abs/2206.10949)
-- NTU RGB+D: A Large Scale Dataset for 3D Human Activity Analysis. Shahroudy et al. CVPR, 2016. [Paper](https://rose1.ntu.edu.sg/dataset/actionRecognition/)
-- NTU RGB+D 120: A Large-Scale Benchmark for 3D Human Activity Understanding. Liu et al. TPAMI, 2020. [Paper](https://arxiv.org/abs/1905.04757)
-- HybrIK: A Hybrid Analytical-Neural Inverse Kinematics Solution for 3D Human Pose and Shape Estimation. Li et al. CVPR, 2021. [Paper](https://arxiv.org/abs/2011.14672) [Code](https://github.com/jeffffffli/HybrIK)
-- Human Motion Diffusion Model. Tevet et al. arXiv, 2022. [Paper](https://arxiv.org/abs/2209.14916)
-- Learning Transferable Visual Models from Natural Language Supervision. Radford et al. ICML, 2021. [Paper](https://arxiv.org/abs/2103.00020)
-
-### Surveys and General Background
-
-- Community Detection in Graphs. Fortunato. Physics Reports, 2010. [Paper](https://doi.org/10.1016/j.physrep.2009.11.002)
-
-## Open-Source Frameworks
-
-- HumanoidVerse: A Multi-Simulator Framework for Humanoid Robot Sim-to-Real Learning. GitHub repository, 2025. [Project](https://github.com/LeCAR-Lab/HumanoidVerse) [Code](https://github.com/LeCAR-Lab/HumanoidVerse)
-- ProtoMotions3: An Open-source Framework for Humanoid Simulation and Control. GitHub repository, 2025. [Project](https://github.com/NVLabs/ProtoMotions/) [Code](https://github.com/NVLabs/ProtoMotions/)
-- MuJoCo Playground: An Open-source Framework for GPU-accelerated Robot Learning and Sim-to-Real Transfer. GitHub repository, 2025. [Project](https://github.com/google-deepmind/mujoco_playground) [Code](https://github.com/google-deepmind/mujoco_playground)
-- Isaac Lab. Open-source repository. [Project](https://github.com/isaac-sim/IsaacLab) [Code](https://github.com/isaac-sim/IsaacLab)
-- Motion-X. Official implementation and dataset release. [Project](https://github.com/IDEA-Research/Motion-X) [Code](https://github.com/IDEA-Research/Motion-X)
+| Title | Venue | Year | Role | Links |
+| --- | --- | --- | --- | --- |
+| Humanoid Locomotion and Manipulation: Current Progress and Challenges in Control, Planning, and Learning | arXiv | 2025 | Broad humanoid survey with control/planning emphasis | [Paper](https://arxiv.org/abs/2501.02116) |
+| Learning-based Legged Locomotion: State of the Art and Future Perspectives | IJRR | 2025 | Broader legged-locomotion context | [Paper](https://doi.org/10.1177/02783649241312698) |
+| Deep Reinforcement Learning for Robotics: A Survey of Real-World Successes | AAAI | 2025 | Real-world RL context | [Paper](https://doi.org/10.1609/aaai.v39i27.35095) |
+| Advancements in Humanoid Robots: A Comprehensive Review and Future Prospects | JAS | 2024 | General humanoid systems overview | [Paper](https://doi.org/10.1109/JAS.2024.124237) |
+| Universal Humanoid Motion Representations for Physics-Based Control | arXiv | 2023 | Motion representation background for WBC | [Paper](https://arxiv.org/abs/2310.04582) |
+| Perpetual Humanoid Control for Real-time Simulated Avatars | ICCV | 2023 | Physics-based avatar control precursor | [Paper](https://openaccess.thecvf.com/content/ICCV2023/html/Luo_Perpetual_Humanoid_Control_for_Real-time_Simulated_Avatars_ICCV_2023_paper.html) |
+| Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning | arXiv | 2022 | Foundational massively parallel RL recipe | [Paper](https://arxiv.org/abs/2109.11978) |
+| Learning Transferable Visual Models from Natural Language Supervision | ICML | 2021 | Common multimodal pretraining background | [Paper](https://arxiv.org/abs/2103.00020) |
 
 ## Citation
 
-If this repository is useful in your review or implementation work, please cite the accompanying survey once it is publicly available:
+If this repository is useful in your review or implementation work, please cite the accompanying survey:
 
 ```text
-Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review
+Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Feifei Wu, Zhe Li, Xiu Li.
+Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review.
 ```
 
-Pull requests for missing links, wrong venue assignments, or new code releases are welcome.
+Pull requests for missing papers, broken links, wrong categorization, or official code releases are welcome.
