@@ -224,8 +224,8 @@ If you are reading the survey while building a system, the tables below are inte
 If this repository is useful in your review or implementation work, please cite the accompanying survey:
 
 ```text
-Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Feifei Wu, Zhe Li, Xiu Li.
-Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review.
+Xiaoyu Yan, Zhiyu Chen, Yuxuan Fang, Xin Li, Ronghui Li, Zhe Li, Feifei Wu, Zhirui Fang, and Xiu Li*.
+A Survey on Learning-Based Whole-Body Control for Humanoid Robots.
 ```
 
 Pull requests for missing papers, broken links, wrong categorization, or official code releases are welcome.
