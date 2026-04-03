@@ -1,11 +1,11 @@
-# Learning-Based Whole-Body Control for Humanoid Robots: An Implementation-Centric Review
+# A Survey on Learning-Based Whole-Body Control for Humanoid Robots
 
 [![Survey](https://img.shields.io/badge/Type-Survey%20Companion-1f6feb?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 [![Topic](https://img.shields.io/badge/Topic-Humanoid%20WBC-0f766e?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 [![Focus](https://img.shields.io/badge/Focus-Implementation--Centric-b45309?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 [![Status](https://img.shields.io/badge/Status-Active%20Curation-7c3aed?style=flat-square)](https://github.com/Earl000333/awesome-humanoid-wbc)
 
-Project page and curated reference repository for the survey paper on learning-based whole-body control for humanoid robots.
+Project page and curated reference repository for the survey paper *A Survey on Learning-Based Whole-Body Control for Humanoid Robots*.
 
 This repository organizes the literature of humanoid whole-body control from an implementation-oriented perspective, following the pipeline from **data acquisition**, **policy learning**, and **simulation transfer** to **real-robot deployment**. The main papers are grouped into four paradigms: **command-based control**, **motion tracking-based control**, **interaction-based control**, and **multimodal learning-based control**.
 
